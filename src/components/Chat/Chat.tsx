@@ -3,6 +3,14 @@ import isMobile from 'ismobilejs'
 import { useHistory } from 'react-router-dom'
 import * as Styled from './Chat.styled'
 
+function output() {
+  console.log('window.innerHeight', window.innerHeight)
+  console.log('window.outerHeight', window.outerHeight)
+  console.log('window.visualViewport.height', window.visualViewport.height)
+  console.log('window.screen.height', window.screen.height)
+  console.log('window.screen.availHeight', window.screen.availHeight)
+}
+
 function Chat() {
   const history = useHistory()
 
@@ -14,10 +22,16 @@ function Chat() {
 
   const handleFocus = useCallback(() => {
     setFocus(true)
+    setTimeout(() => {
+      output()
+    }, 700)
   }, [])
 
   const handleBlur = useCallback(() => {
     setFocus(false)
+    setTimeout(() => {
+      output()
+    }, 700)
   }, [])
 
   return (

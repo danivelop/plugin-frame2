@@ -11,6 +11,7 @@ export const MessageStream = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 0 8px;
+  padding-bottom: env(safe-area-inset-bottom, 0);
   box-sizing: border-box;
   background-color: white;
 `
@@ -31,16 +32,23 @@ export const GuestMessage = styled.div`
   border-radius: 10px;
 `
 
-export const RelativeWrapper = styled.div`
-  position: absolute;
+export const RelativeContainer = styled.div`
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  height: 100vh;
+`
+
+export const RelativeWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
 `
 
 export const Header = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -50,12 +58,13 @@ export const Header = styled.div`
 `
 
 export const Footer = styled.div`
-  position: fixed;
-  bottom: 0;
+  position: absolute;
+  bottom: env(safe-area-inset-bottom, 0);
   left: 0;
   right: 0;
   width: 100%;
   height: 46px;
+  background-color: white;
   border-top: 1px solid #E8E8E8;
 `
 
@@ -64,7 +73,7 @@ export const Input = styled.input`
   height: 100%;
   padding: 0 20px;
   box-sizing: border-box;
-  outline: none;;
+  outline: none;
   border: 0;
 `
 
