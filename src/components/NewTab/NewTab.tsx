@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import * as Styled from './NewTab.styled'
 
 function output() {
@@ -10,13 +10,17 @@ function output() {
 }
 
 function NewTab() {
+  const [isFocused, setFocused] = useState(false)
+
   const handleFocus = useCallback(() => {
+    setFocused(true)
     setTimeout(() => {
       output()
     }, 700)
   }, [])
 
   const handleBlur = useCallback(() => {
+    setFocused(false)
     window.scrollTo(0, document.scrollingElement?.scrollHeight ?? 0)
     setTimeout(() => {
       output()
@@ -36,7 +40,7 @@ function NewTab() {
       <Styled.RelativeContainer>
         <Styled.RelativeWrapper>
           <Styled.Header />
-          <Styled.Footer>
+          <Styled.Footer isFocused={isFocused}>
             <Styled.Input
               placeholder="메세지를 입력하세요"
               onFocus={handleFocus}

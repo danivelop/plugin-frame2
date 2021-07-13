@@ -1,4 +1,8 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+
+interface IsFocusedProps {
+  isFocused: boolean
+}
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -57,7 +61,7 @@ export const Header = styled.div`
   background-color: #76f898;
 `
 
-export const Footer = styled.div`
+export const Footer = styled.div<IsFocusedProps>`
   position: absolute;
   bottom: env(safe-area-inset-bottom, 0);
   left: 0;
@@ -66,6 +70,11 @@ export const Footer = styled.div`
   height: 46px;
   background-color: white;
   border-top: 1px solid #E8E8E8;
+
+  ${({ isFocused }) => isFocused && css`
+    position: fixed;
+    bottom: 0;
+  `}
 `
 
 export const Input = styled.input`
