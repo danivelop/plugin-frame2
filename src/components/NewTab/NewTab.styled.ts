@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   padding-bottom: 46px;
 `
 
-export const MessageStream = styled.div`
+export const MessageStream = styled.div<IsFocusedProps>`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -18,6 +18,10 @@ export const MessageStream = styled.div`
   padding-bottom: env(safe-area-inset-bottom, 0);
   box-sizing: border-box;
   background-color: white;
+
+  ${({ isFocused }) => isFocused && css`
+    padding-bottom: 0;
+  `}
 `
 
 export const PersonMessage = styled.div`
@@ -36,13 +40,17 @@ export const GuestMessage = styled.div`
   border-radius: 10px;
 `
 
-export const RelativeContainer = styled.div`
+export const RelativeContainer = styled.div<IsFocusedProps>`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   height: 100vh;
+
+  ${({ isFocused }) => isFocused && css`
+    height: -webkit-fill-available;
+  `}
 `
 
 export const RelativeWrapper = styled.div`
@@ -72,7 +80,6 @@ export const Footer = styled.div<IsFocusedProps>`
   border-top: 1px solid #E8E8E8;
 
   ${({ isFocused }) => isFocused && css`
-    position: fixed;
     bottom: 0;
   `}
 `

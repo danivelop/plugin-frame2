@@ -4,11 +4,11 @@ interface IsAndroid {
   isAndroid: boolean
 }
 
-interface WrapperProps extends IsAndroid {
+interface ContainerProps extends IsAndroid {
   isFocus: boolean
 }
 
-export const Wrapper = styled.div<WrapperProps>`
+export const Container = styled.div<ContainerProps>`
   position: absolute;
   top: 0;
   left: 0;
@@ -31,6 +31,12 @@ export const Wrapper = styled.div<WrapperProps>`
     width: 100%;
     height: 100%;
   `}
+`
+
+export const Wrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
 `
 
 export const Header = styled.div<IsAndroid>`
