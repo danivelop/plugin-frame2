@@ -39,7 +39,7 @@ function NewTab() {
   }, [])
 
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper isFocused={isFocused}>
       <Styled.MessageStream isFocused={isFocused}>
         { (new Array(20)).fill(0).map((item, index) => (
           <React.Fragment key={index}>
@@ -48,7 +48,7 @@ function NewTab() {
           </React.Fragment>
         )) }
       </Styled.MessageStream>
-      <Styled.Header />
+      <Styled.Header isFocused={isFocused} />
       <Styled.Footer isFocused={isFocused}>
         <Styled.Input
           placeholder="메세지를 입력하세요"
@@ -56,6 +56,7 @@ function NewTab() {
           onBlur={handleBlur}
         />
       </Styled.Footer>
+      { isFocused && <Styled.SafariBlockVirtualArea /> }
     </Styled.Wrapper>
   )
 }

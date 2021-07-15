@@ -4,10 +4,22 @@ interface IsFocusedProps {
   isFocused: boolean
 }
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<IsFocusedProps>`
   width: 100%;
-  padding-top: 46px;
-  padding-bottom: 46px;
+
+  ${({ isFocused }) => !isFocused && css`
+    padding-top: 46px;
+    padding-bottom: 46px;
+  `}
+
+  ${({ isFocused }) => isFocused && css`
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+  `}
 `
 
 export const MessageStream = styled.div<IsFocusedProps>`
@@ -15,12 +27,19 @@ export const MessageStream = styled.div<IsFocusedProps>`
   flex-direction: column;
   width: 100%;
   padding: 0 8px;
-  padding-bottom: env(safe-area-inset-bottom, 0);
   box-sizing: border-box;
   background-color: white;
 
+  ${({ isFocused }) => !isFocused && css`
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  `}
+
   ${({ isFocused }) => isFocused && css`
-    padding-bottom: 0;
+    position: absolute;
+    top: 46px;
+    bottom: 46px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   `}
 `
 
@@ -40,7 +59,7 @@ export const GuestMessage = styled.div`
   border-radius: 10px;
 `
 
-export const Header = styled.div`
+export const Header = styled.div<IsFocusedProps>`
   position: fixed;
   top: 0;
   left: 0;
@@ -48,6 +67,10 @@ export const Header = styled.div`
   width: 100%;
   height: 46px;
   background-color: #76f898;
+
+  ${({ isFocused }) => isFocused && css`
+    position: absolute;
+  `}
 `
 
 export const Footer = styled.div<IsFocusedProps>`
@@ -61,6 +84,7 @@ export const Footer = styled.div<IsFocusedProps>`
   border-top: 1px solid #E8E8E8;
 
   ${({ isFocused }) => isFocused && css`
+    position: absolute;
     bottom: 0;
   `}
 `
