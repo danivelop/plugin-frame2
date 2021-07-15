@@ -1,5 +1,8 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useRef, useEffect } from 'react'
+import smoothscroll from 'smoothscroll-polyfill'
 import * as Styled from './NewTab.styled'
+
+smoothscroll.polyfill()
 
 function output() {
   console.log('window.innerHeight', window.innerHeight)
@@ -15,9 +18,22 @@ function output() {
 
 function NewTab() {
   const [isFocused, setFocused] = useState(false)
+  const messageStreamRef = useRef<HTMLDivElement>(null)
+  const prevScrollTop = useRef(document.scrollingElement?.scrollTop ?? window.scrollY)
 
   const handleFocus = useCallback(() => {
     setFocused(true)
+
+    const scrollTop = document.scrollingElement?.scrollTop ?? window.scrollY
+    const scrollHeight = document.scrollingElement?.scrollHeight ?? (window.innerHeight + window.scrollY)
+    const clientHeight = document.scrollingElement?.clientHeight ?? window.innerHeight
+    
+    if (scrollTop + clientHeight >= scrollHeight) {
+      window.scrollTo(0, scrollHeight)
+    }
+
+    prevScrollTop.current = scrollTop
+
     setTimeout(() => {
       output()
     }, 700)
@@ -25,22 +41,30 @@ function NewTab() {
 
   const handleBlur = useCallback(() => {
     setFocused(false)
-
-    const scrollTop = document.scrollingElement?.scrollTop ?? window.scrollY
-    const scrollHeight = document.scrollingElement?.scrollHeight ?? (window.innerHeight + window.scrollY)
-
-    if (scrollTop + window.visualViewport.height >= scrollHeight) {
-      window.scrollTo(0, document.scrollingElement?.scrollHeight ?? 0)
-    }
+    prevScrollTop.current = messageStreamRef.current?.scrollTop ?? window.scrollY
 
     setTimeout(() => {
       output()
     }, 700)
   }, [])
 
+  useEffect(() => {
+    if (!messageStreamRef.current) {
+      return
+    }
+    if (isFocused) {
+      messageStreamRef.current.scrollTop = prevScrollTop.current
+    } else {
+      window.scrollTo(0 ,prevScrollTop.current)
+    }
+  }, [isFocused])
+
   return (
     <Styled.Wrapper isFocused={isFocused}>
-      <Styled.MessageStream isFocused={isFocused}>
+      <Styled.MessageStream
+        ref={messageStreamRef}
+        isFocused={isFocused}
+      >
         { (new Array(20)).fill(0).map((item, index) => (
           <React.Fragment key={index}>
             <Styled.PersonMessage>매니저 메세지{index}</Styled.PersonMessage>
