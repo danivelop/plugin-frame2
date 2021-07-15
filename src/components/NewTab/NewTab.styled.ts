@@ -40,27 +40,8 @@ export const GuestMessage = styled.div`
   border-radius: 10px;
 `
 
-export const RelativeContainer = styled.div<IsFocusedProps>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 100vh;
-
-  ${({ isFocused }) => isFocused && css`
-    height: -webkit-fill-available;
-  `}
-`
-
-export const RelativeWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-`
-
 export const Header = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -70,7 +51,7 @@ export const Header = styled.div`
 `
 
 export const Footer = styled.div<IsFocusedProps>`
-  position: absolute;
+  position: fixed;
   bottom: env(safe-area-inset-bottom, 0);
   left: 0;
   right: 0;

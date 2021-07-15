@@ -48,19 +48,14 @@ function NewTab() {
           </React.Fragment>
         )) }
       </Styled.MessageStream>
-      <Styled.RelativeContainer isFocused={isFocused}>
-        <Styled.RelativeWrapper>
-          <Styled.Header />
-          <Styled.Footer isFocused={isFocused}>
-            <Styled.Input
-              placeholder="메세지를 입력하세요"
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-            />
-          </Styled.Footer>
-        </Styled.RelativeWrapper>
-      </Styled.RelativeContainer>
-      {/* <Styled.SafariBlockVirtualArea /> */}
+      <Styled.Header />
+      <Styled.Footer isFocused={isFocused}>
+        <Styled.Input
+          placeholder="메세지를 입력하세요"
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+        />
+      </Styled.Footer>
     </Styled.Wrapper>
   )
 }
