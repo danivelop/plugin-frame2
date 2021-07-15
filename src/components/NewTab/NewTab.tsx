@@ -1,4 +1,5 @@
-import React, { useCallback, useState, useRef } from 'react'
+import React, { useCallback, useState, useRef, useEffect } from 'react'
+import BodyScrollService from 'services/BodyScrollService'
 import * as Styled from './NewTab.styled'
 
 function output() {
@@ -17,7 +18,7 @@ function NewTab() {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const scrollToBottom = useCallback(() => {
-    window.scrollTo(0, document.body.scrollHeight);
+    BodyScrollService.scrollTo(0, document.body.scrollHeight)
   }, [])
 
   const handleClickMock = useCallback(() => {
@@ -25,30 +26,42 @@ function NewTab() {
     setTimeout(() => {
       output()
     }, 700)
+    scrollToBottom()
     inputRef.current?.focus()
+  }, [scrollToBottom])
+
+  const handleTouchMove = useCallback(() => {
+    inputRef.current?.blur()
   }, [])
 
+  useEffect(function cleanUp() {
+    return () => {
+      BodyScrollService.unsubscribeScrollEvents()
+    }
+  }, [handleTouchMove])
+
   const handleFocus = useCallback(() => {
-    scrollToBottom()
     setFocused(true)
+      BodyScrollService.subscribeScrollEvents(handleTouchMove)
   }, [
     setFocused,
-    scrollToBottom,
+    handleTouchMove,
   ])
 
   const handleBlur = useCallback(() => {
     setFocused(false)
-    // window.scrollTo(0, document.scrollingElement?.scrollHeight ?? 0)
     setTimeout(() => {
       output()
     }, 700)
     scrollToBottom()
-  }, [scrollToBottom])
+      BodyScrollService.unsubscribeScrollEvents()
+  }, [
+    scrollToBottom,
+  ])
 
   const handleChangeValue = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    scrollToBottom()
     setValue(event.target.value)
-  }, [scrollToBottom])
+  }, [])
 
   return (
     <Styled.Wrapper>
