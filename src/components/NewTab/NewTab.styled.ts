@@ -7,7 +7,6 @@ interface IsFocusedProps {
 export const Wrapper = styled.div`
   width: 100%;
   padding-top: 46px;
-  padding-bottom: 46px;
 `
 
 export const MessageStream = styled.div`
@@ -15,7 +14,6 @@ export const MessageStream = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 0 8px;
-  padding-bottom: env(safe-area-inset-bottom, 0);
   box-sizing: border-box;
   background-color: white;
 `
@@ -37,12 +35,10 @@ export const GuestMessage = styled.div`
 `
 
 export const RelativeContainer = styled.div`
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 100vh;
 `
 
 export const RelativeWrapper = styled.div`
@@ -52,7 +48,7 @@ export const RelativeWrapper = styled.div`
 `
 
 export const Header = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -62,9 +58,12 @@ export const Header = styled.div`
 `
 
 export const Footer = styled.div<IsFocusedProps>`
-  position: absolute;
-  bottom: env(safe-area-inset-bottom, 0);
+  display: ${({ isFocused }) => isFocused ? 'none' : 'block'};
+  position: fixed;
+  z-index: 1;
+  transform: translateZ(0px);
   left: 0;
+  bottom: env(safe-area-inset-bottom, 0);
   right: 0;
   width: 100%;
   height: 46px;
@@ -72,11 +71,21 @@ export const Footer = styled.div<IsFocusedProps>`
   border-top: 1px solid #E8E8E8;
 
   ${({ isFocused }) => isFocused && css`
-    position: fixed;
-    bottom: 0;
   `}
 `
 
+export const InputWrapper = styled.div<IsFocusedProps>`
+  position: relative;
+  width: 100vw;
+  height: 46px;
+  background-color: white;
+  border-top: 1px solid #E8E8E8;
+  
+  opacity: ${({ isFocused }) => isFocused ? 1 : 0};
+`
+
+  // bottom: env(safe-area-inset-bottom, 0);
+    // bottom: 0;
 export const Input = styled.input`
   width: 100%;
   height: 100%;
