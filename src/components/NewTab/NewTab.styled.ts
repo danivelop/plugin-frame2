@@ -73,6 +73,14 @@ export const Header = styled.div<IsFocusedProps>`
   `}
 `
 
+export const EmptyHeader = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 1px;
+`
+
 export const Footer = styled.div<IsFocusedProps>`
   position: fixed;
   bottom: env(safe-area-inset-bottom, 0);
@@ -100,4 +108,14 @@ export const Input = styled.input`
 
 export const SafariBlockVirtualArea = styled.div`
   height: calc(100% + 1px);
+`
+
+export const EmptyBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateZ(-10000px);
+  background-color: white;
 `

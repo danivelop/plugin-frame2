@@ -72,7 +72,9 @@ function NewTab() {
           </React.Fragment>
         )) }
       </Styled.MessageStream>
-      <Styled.Header isFocused={isFocused} />
+      <Styled.Header isFocused={isFocused}>
+        { !isFocused && <Styled.EmptyHeader /> }
+      </Styled.Header>
       <Styled.Footer isFocused={isFocused}>
         <Styled.Input
           placeholder="메세지를 입력하세요"
