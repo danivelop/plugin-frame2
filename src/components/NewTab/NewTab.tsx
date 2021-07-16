@@ -83,6 +83,7 @@ function NewTab() {
         />
       </Styled.Footer>
       { isFocused && <Styled.SafariBlockVirtualArea /> }
+      { !isFocused && <Styled.EmptyBackground /> }
     </Styled.Wrapper>
   )
 }

@@ -25,6 +25,7 @@ export const Wrapper = styled.div<IsFocusedProps>`
 export const MessageStream = styled.div<IsFocusedProps>`
   display: flex;
   flex-direction: column;
+  position: sticky;
   width: 100%;
   padding: 0 8px;
   box-sizing: border-box;
@@ -90,6 +91,7 @@ export const Footer = styled.div<IsFocusedProps>`
   height: 46px;
   background-color: white;
   border-top: 1px solid #E8E8E8;
+  z-index: 1;
 
   ${({ isFocused }) => isFocused && css`
     position: absolute;
