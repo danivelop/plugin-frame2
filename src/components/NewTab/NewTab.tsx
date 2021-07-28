@@ -18,13 +18,8 @@ function output() {
 
 function NewTab() {
   const [isFocused, setFocused] = useState(false)
-  const [isScrollingToBottom, setScrollingToBottom] = useState(false)
-
   const messageStreamRef = useRef<HTMLDivElement>(null)
   const prevScrollTop = useRef(document.scrollingElement?.scrollTop ?? window.scrollY)
-
-  // scroll을 아래로 내리고 있을때 footer의 bottom에 safe-area를 주기위한 ref
-  const currentScrollTop = useRef(document.scrollingElement?.scrollTop ?? window.scrollY)
 
   const handleFocus = useCallback(() => {
     setFocused(true)
@@ -53,28 +48,6 @@ function NewTab() {
     }, 700)
   }, [])
 
-  const handleScroll = useCallback((event) => {
-    const scrollTop = document.scrollingElement?.scrollTop ?? window.scrollY
-    const scrollHeight = document.scrollingElement?.scrollHeight ?? (window.innerHeight + window.scrollY)
-    const clientHeight = document.scrollingElement?.clientHeight ?? window.innerHeight
-
-    if (
-      !isScrollingToBottom &&
-      currentScrollTop.current > scrollTop &&
-      scrollTop + clientHeight < scrollHeight - 50 //스크롤 가장 아래가 아닐때
-    ) {
-      setScrollingToBottom(true)
-    } else if (
-      isScrollingToBottom &&
-      currentScrollTop.current < scrollTop &&
-      scrollTop > 50 // 스크롤이 가장 위가 아닐때
-    ) {
-      setScrollingToBottom(false)
-    }
-
-    currentScrollTop.current = scrollTop
-  }, [isScrollingToBottom])
-
   useEffect(() => {
     if (!messageStreamRef.current) {
       return
@@ -85,14 +58,6 @@ function NewTab() {
       window.scrollTo(0 ,prevScrollTop.current)
     }
   }, [isFocused])
-
-  useEffect(() => {
-    document.addEventListener('scroll', handleScroll)
-
-    return function cleanup() {
-      document.removeEventListener('scroll', handleScroll)
-    }
-  }, [handleScroll])
 
   return (
     <Styled.Wrapper isFocused={isFocused}>
@@ -107,18 +72,18 @@ function NewTab() {
           </React.Fragment>
         )) }
       </Styled.MessageStream>
-      {/* <Styled.Header isFocused={isFocused}>
+      <Styled.Header isFocused={isFocused}>
         { !isFocused && <Styled.EmptyHeader /> }
-      </Styled.Header> */}
-      <Styled.Footer isFocused={isFocused} isScrollingToBottom={isScrollingToBottom}>
+      </Styled.Header>
+      <Styled.Footer isFocused={isFocused}>
         <Styled.Input
           placeholder="메세지를 입력하세요"
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
       </Styled.Footer>
-      {/* { isFocused && <Styled.SafariBlockVirtualArea /> } */}
-      {/* { !isFocused && <Styled.EmptyBackground /> } */}
+      { isFocused && <Styled.SafariBlockVirtualArea /> }
+      { !isFocused && <Styled.EmptyBackground /> }
     </Styled.Wrapper>
   )
 }

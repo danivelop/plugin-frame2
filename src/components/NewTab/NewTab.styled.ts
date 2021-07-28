@@ -4,10 +4,6 @@ interface IsFocusedProps {
   isFocused: boolean
 }
 
-interface FooterProps extends IsFocusedProps {
-  isScrollingToBottom: boolean
-}
-
 export const Wrapper = styled.div<IsFocusedProps>`
   width: 100%;
 
@@ -35,9 +31,9 @@ export const MessageStream = styled.div<IsFocusedProps>`
   box-sizing: border-box;
   background-color: white;
 
-  /* ${({ isFocused }) => !isFocused && css`
+  ${({ isFocused }) => !isFocused && css`
     padding-bottom: env(safe-area-inset-bottom, 0);
-  `} */
+  `}
 
   ${({ isFocused }) => isFocused && css`
     position: absolute;
@@ -86,9 +82,9 @@ export const EmptyHeader = styled.div`
   width: 1px;
 `
 
-export const Footer = styled.div<FooterProps>`
+export const Footer = styled.div<IsFocusedProps>`
   position: fixed;
-  bottom: 0;
+  bottom: env(safe-area-inset-bottom, 0);
   left: 0;
   right: 0;
   width: 100%;
@@ -96,10 +92,6 @@ export const Footer = styled.div<FooterProps>`
   background-color: white;
   border-top: 1px solid #E8E8E8;
   z-index: 1;
-
-  ${({ isScrollingToBottom }) => isScrollingToBottom && css`
-    bottom: env(safe-area-inset-bottom, 0);
-  `}
 
   ${({ isFocused }) => isFocused && css`
     position: absolute;
