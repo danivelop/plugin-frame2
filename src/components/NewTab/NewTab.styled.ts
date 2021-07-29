@@ -4,6 +4,10 @@ interface IsFocusedProps {
   isFocused: boolean
 }
 
+interface FooterProps extends IsFocusedProps {
+  isScrollBottom: boolean
+}
+
 export const Wrapper = styled.div<IsFocusedProps>`
   width: 100%;
 
@@ -30,10 +34,7 @@ export const MessageStream = styled.div<IsFocusedProps>`
   padding: 0 8px;
   box-sizing: border-box;
   background-color: white;
-
-  ${({ isFocused }) => !isFocused && css`
-    padding-bottom: env(safe-area-inset-bottom, 0);
-  `}
+  z-index: 1;  // @daniel EmptyBackground보다 위에 있도록 하기 위함
 
   ${({ isFocused }) => isFocused && css`
     position: absolute;
@@ -68,6 +69,7 @@ export const Header = styled.div<IsFocusedProps>`
   width: 100%;
   height: 46px;
   background-color: #76f898;
+  z-index: 1;  // @daniel EmptyBackground보다 위에 있도록 하기 위함
 
   ${({ isFocused }) => isFocused && css`
     position: absolute;
@@ -82,7 +84,7 @@ export const EmptyHeader = styled.div`
   width: 1px;
 `
 
-export const Footer = styled.div<IsFocusedProps>`
+export const Footer = styled.div<FooterProps>`
   position: fixed;
   bottom: env(safe-area-inset-bottom, 0);
   left: 0;
@@ -91,11 +93,15 @@ export const Footer = styled.div<IsFocusedProps>`
   height: 46px;
   background-color: white;
   border-top: 1px solid #E8E8E8;
-  z-index: 1;
+  z-index: 1;  // @daniel EmptyBackground보다 위에 있도록 하기 위함
+
+  ${({ isScrollBottom }) => isScrollBottom && css`
+    bottom: 0;
+  `}
 
   ${({ isFocused }) => isFocused && css`
     position: absolute;
-    bottom: 0;
+    bottom: env(safe-area-inset-bottom, 0);
   `}
 `
 
@@ -118,6 +124,5 @@ export const EmptyBackground = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  transform: translateZ(-10000px);
   background-color: white;
 `
