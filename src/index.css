@@ -5,8 +5,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* @daniel 하단 주소바의 컬러 변경하기 위함 */
-  background-color: #76f898;
 }
 
 body.nonScrollable {
