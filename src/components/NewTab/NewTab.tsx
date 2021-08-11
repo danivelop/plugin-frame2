@@ -1,5 +1,7 @@
 import React, { useCallback, useState, useRef, useEffect } from 'react'
+import isMobile from 'ismobilejs'
 import smoothscroll from 'smoothscroll-polyfill'
+import { noop } from 'lodash'
 import * as Styled from './NewTab.styled'
 
 smoothscroll.polyfill()
@@ -25,6 +27,10 @@ function NewTab() {
   const timeoutId = useRef<any>(null)
 
   const handleFocus = useCallback(() => {
+    if (isMobile().android.phone) {
+      return noop
+    }
+
     setFocused(true)
 
     const scrollTop = document.scrollingElement?.scrollTop ?? window.scrollY
@@ -48,6 +54,10 @@ function NewTab() {
   }, [])
 
   const handleBlur = useCallback(() => {
+    if (isMobile().android.phone) {
+      return noop
+    }
+
     setFocused(false)
     prevScrollTop.current = messageStreamRef.current?.scrollTop ?? window.scrollY
 
@@ -111,6 +121,10 @@ function NewTab() {
   }, [])
 
   useEffect(() => {
+    if (isMobile().android.phone) {
+      return noop
+    }
+
     if (!messageStreamRef.current) {
       return
     }
@@ -122,6 +136,10 @@ function NewTab() {
   }, [isFocused])
 
   useEffect(() => {
+    if (isMobile().android.phone) {
+      return noop
+    }
+
     document.addEventListener('scroll', handleScroll)
 
     return function cleanup() {
@@ -130,6 +148,10 @@ function NewTab() {
   }, [handleScroll])
 
   // useEffect(() => {
+  //   if (isMobile().android.phone) {
+  //     return noop
+  //   }
+
   //   if (!messageStreamRef.current) {
   //     return
   //   }
