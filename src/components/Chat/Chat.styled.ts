@@ -62,7 +62,7 @@ export const MessageStream = styled.div<IsAndroid>`
   flex-direction: column;
   position: absolute;
   top: 46px;
-  bottom: 46px;
+  bottom: env(safe-area-inset-bottom, 0);
   width: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -98,7 +98,7 @@ export const GuestMessage = styled.div`
 
 export const Footer = styled.div<IsAndroid>`
   position: absolute;
-  bottom: 0;
+  bottom: env(safe-area-inset-bottom, 0);
   left: 0;
   right: 0;
   width: 100%;
