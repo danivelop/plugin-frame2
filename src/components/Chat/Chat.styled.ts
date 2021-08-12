@@ -1,10 +1,6 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
-interface IsAndroid {
-  isAndroid: boolean
-}
-
-interface ContainerProps extends IsAndroid {
+interface ContainerProps {
   isFocus: boolean
 }
 
@@ -14,11 +10,6 @@ export const Container = styled.div<ContainerProps>`
   height: 100%;
   overflow-y: auto;
   background-color: white;
-
-  /* ${({ isFocus }) => isFocus && css`
-    height: calc(100% - 260px);
-    top: 260px;
-  `} */
 `
 
 export const Wrapper = styled.div`
@@ -28,7 +19,7 @@ export const Wrapper = styled.div`
   height: 100%;
 `
 
-export const Header = styled.div<IsAndroid>`
+export const Header = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
@@ -38,7 +29,7 @@ export const Header = styled.div<IsAndroid>`
 
 export const Close = styled.div``
 
-export const MessageStream = styled.div<IsAndroid>`
+export const MessageStream = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -66,7 +57,7 @@ export const GuestMessage = styled.div`
   border-radius: 10px;
 `
 
-export const Footer = styled.div<IsAndroid>`
+export const Footer = styled.div`
   width: 100%;
   height: 46px;
   padding-bottom: env(safe-area-inset-bottom, 0);

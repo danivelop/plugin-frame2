@@ -91,6 +91,7 @@ function NewTab() {
    * scrollTo로 이동되어 스크롤이 부드럽지 않음. timer에 100만 넣어준 이유는 사파리 특성상 over scrolling일때는 timer가 멈춤.
    * 그래서 100만 넣어주어도 over scrolling중일땐 실행이 안되다가 over scrolling이 멈춘후 실행됨
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleScrollMessageStream = useCallback(() => {
     if (!messageStreamRef.current) {
       return
