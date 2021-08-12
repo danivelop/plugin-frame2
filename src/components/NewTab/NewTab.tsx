@@ -188,6 +188,7 @@ function NewTab() {
         )) }
       </Styled.MessageStream>
       <Styled.Header isFocused={isFocused}>
+        v1.0.7
         { !isFocused && <Styled.EmptyHeader /> }
       </Styled.Header>
       <Styled.Footer isFocused={isFocused} isScrollBottom={isScrollBottom}>

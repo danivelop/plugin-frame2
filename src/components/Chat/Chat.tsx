@@ -90,6 +90,7 @@ function Chat() {
       <Styled.Wrapper>
         <Styled.Header>
           <Styled.Close onClick={handleBack}>뒤로가기</Styled.Close>
+          v1.0.7
         </Styled.Header>
         <Styled.MessageStream>
           { (new Array(20)).fill(0).map((item, index) => (
