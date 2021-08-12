@@ -56,7 +56,7 @@ function Chat() {
           />
         </Styled.Footer>
       </Styled.Wrapper>
-      {/* { isFocus && <Styled.SafariBlockVirtualArea /> } */}
+      { isFocus && <Styled.SafariBlockVirtualArea /> }
     </Styled.Container>
   )
 }
