@@ -8,8 +8,8 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/all" component={LoungePage} />
-        <Route exact path="/chat" component={ChatPage} />
-        <Route exact path="/newtab" component={NewTabPage} />
+        <Route exact path="/fixedwrapper" component={ChatPage} />
+        <Route exact path="/bodyscroll" component={NewTabPage} />
       </Switch>
     </BrowserRouter>
   )
