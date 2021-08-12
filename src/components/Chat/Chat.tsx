@@ -86,10 +86,7 @@ function Chat() {
   ])
 
   return (
-    <Styled.Container
-      ref={containerRef}
-      isFocus={isFocus}
-    >
+    <Styled.Container ref={containerRef}>
       <Styled.Wrapper>
         <Styled.Header>
           <Styled.Close onClick={handleBack}>뒤로가기</Styled.Close>

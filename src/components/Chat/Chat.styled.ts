@@ -1,10 +1,6 @@
 import styled from 'styled-components'
 
-interface ContainerProps {
-  isFocus: boolean
-}
-
-export const Container = styled.div<ContainerProps>`
+export const Container = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
