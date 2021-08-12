@@ -9,7 +9,7 @@ function Lounge() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   const handleClickChat = useCallback(() => {
-    history.push('/chat')
+    history.push('/fixedwrapper')
   }, [history])
 
   return (
