@@ -45,7 +45,6 @@ function Chat() {
    * 2. 이렇게 해도 스크롤이 가장 위일때 한번더 over scroll하면 여전히 virtual영역 뒤로 스크롤됨. 이를 위해 스크롤이 가장 위라면 1px만큼 내려줌
    */
   const handleScrollContainer = useCallback(() => {
-    console.log('fulfilled')
     if (!containerRef.current) {
       return
     }
@@ -70,6 +69,7 @@ function Chat() {
       }
 
       containerRef.current.addEventListener('scroll', handleScrollContainer)
+      handleScrollContainer()
 
       return function cleanup() {
         if (!containerRef.current) {
