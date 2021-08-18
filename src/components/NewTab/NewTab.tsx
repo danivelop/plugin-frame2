@@ -136,17 +136,17 @@ function NewTab() {
     }
   }, [isFocused])
 
-  useEffect(() => {
-    if (isMobile().android.phone) {
-      return noop
-    }
+  // useEffect(() => {
+  //   if (isMobile().android.phone) {
+  //     return noop
+  //   }
 
-    document.addEventListener('scroll', handleScroll)
+  //   document.addEventListener('scroll', handleScroll)
 
-    return function cleanup() {
-      document.removeEventListener('scroll', handleScroll)
-    }
-  }, [handleScroll])
+  //   return function cleanup() {
+  //     document.removeEventListener('scroll', handleScroll)
+  //   }
+  // }, [handleScroll])
 
   // useEffect(() => {
   //   if (isMobile().android.phone) {
@@ -187,19 +187,17 @@ function NewTab() {
           </React.Fragment>
         )) }
       </Styled.MessageStream>
-      <Styled.Header isFocused={isFocused}>
+      <Styled.Header>
         v1.0.7
-        { !isFocused && <Styled.EmptyHeader /> }
       </Styled.Header>
-      <Styled.Footer isFocused={isFocused} isScrollBottom={isScrollBottom}>
+      <Styled.Footer isFocused={isFocused}>
         <Styled.Input
           placeholder="메세지를 입력하세요"
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
+        { isFocused && <Styled.SafariBlockVirtualArea /> }
       </Styled.Footer>
-      { isFocused && <Styled.SafariBlockVirtualArea /> }
-      { !isFocused && <Styled.EmptyBackground /> }
     </Styled.Wrapper>
   )
 }
