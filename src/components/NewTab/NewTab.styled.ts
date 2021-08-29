@@ -4,25 +4,13 @@ interface IsFocusedProps {
   isFocused: boolean
 }
 
-export const Wrapper = styled.div<IsFocusedProps>`
+export const Wrapper = styled.div`
   width: 100%;
-
-  ${({ isFocused }) => !isFocused && css`
-    padding-top: 46px;
-    padding-bottom: 46px;
-  `}
-
-  ${({ isFocused }) => isFocused && css`
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow-y: auto;
-  `}
+  padding-top: 46px;
+  padding-bottom: 46px;
 `
 
-export const MessageStream = styled.div<IsFocusedProps>`
+export const MessageStream = styled.div`
   display: flex;
   flex-direction: column;
   position: sticky;
@@ -30,14 +18,6 @@ export const MessageStream = styled.div<IsFocusedProps>`
   padding: 0 8px;
   box-sizing: border-box;
   background-color: white;
-
-  ${({ isFocused }) => isFocused && css`
-    position: absolute;
-    top: 46px;
-    bottom: 46px;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  `}
 `
 
 export const PersonMessage = styled.div`
@@ -76,10 +56,10 @@ export const Footer = styled.div<IsFocusedProps>`
   background-color: white;
   border-top: 1px solid #E8E8E8;
 
-  ${({ isFocused }) => isFocused && css`
+  /* ${({ isFocused }) => isFocused && css`
     display: flex;
     overflow-y: auto;
-  `}
+  `} */
 `
 
 export const Input = styled.input`

@@ -121,20 +121,20 @@ function NewTab() {
     }
   }, [])
 
-  useEffect(() => {
-    if (isMobile().android.phone) {
-      return noop
-    }
+  // useEffect(() => {
+  //   if (isMobile().android.phone) {
+  //     return noop
+  //   }
 
-    if (!messageStreamRef.current) {
-      return
-    }
-    if (isFocused) {
-      messageStreamRef.current.scrollTop = prevScrollTop.current
-    } else {
-      window.scrollTo(0 ,prevScrollTop.current)
-    }
-  }, [isFocused])
+  //   if (!messageStreamRef.current) {
+  //     return
+  //   }
+  //   if (isFocused) {
+  //     messageStreamRef.current.scrollTop = prevScrollTop.current
+  //   } else {
+  //     window.scrollTo(0 ,prevScrollTop.current)
+  //   }
+  // }, [isFocused])
 
   // useEffect(() => {
   //   if (isMobile().android.phone) {
@@ -175,11 +175,8 @@ function NewTab() {
   // ])
 
   return (
-    <Styled.Wrapper isFocused={isFocused}>
-      <Styled.MessageStream
-        ref={messageStreamRef}
-        isFocused={isFocused}
-      >
+    <Styled.Wrapper>
+      <Styled.MessageStream ref={messageStreamRef}>
         { (new Array(20)).fill(0).map((item, index) => (
           <React.Fragment key={index}>
             <Styled.PersonMessage>매니저 메세지{index}</Styled.PersonMessage>
@@ -196,7 +193,7 @@ function NewTab() {
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
-        { isFocused && <Styled.SafariBlockVirtualArea /> }
+        {/* { isFocused && <Styled.SafariBlockVirtualArea /> } */}
       </Styled.Footer>
     </Styled.Wrapper>
   )
